@@ -223,6 +223,7 @@ You can fork or edit this source code !
 | ✅       | List Requested Participants in Group   | POST   | /group/participants/requested         |
 | ✅       | Approve Requested Participant in Group | POST   | /group/participants/requested/approve |
 | ✅       | Reject Requested Participant in Group  | POST   | /group/participants/requested/reject  |
+| ✅       | Change Group Photo                     | POST   | /group/photo                          |
 | ✅       | Unfollow Newsletter                    | POST   | /newsletter/unfollow                  |
 
 ```txt
@@ -259,6 +260,7 @@ You can fork or edit this source code !
 | Auto Reply           | ![Auto Reply](https://i.ibb.co.com/D4rTytX/IMG-20220517-162500.jpg)                      |
 | Basic Auth Prompt    | ![Basic Auth Prompt](https://i.ibb.co.com/PDjQ92W/Screenshot-2022-11-06-at-14-06-29.png) |
 | Manage Participant   | ![Manage Participant](https://i.ibb.co.com/x7yn9nY/Manage-Participant.png)               |
+| Change Group Photo   | ![Change Group Photo](https://i.ibb.co/PhdJvQQ/change-group-photo.png)                   |
 | My Newsletter        | ![List Newsletter](https://i.ibb.co.com/BLvyS9j/My-Newsletter.png)                       |
 
 ### Mac OS NOTE
