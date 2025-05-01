@@ -26,6 +26,7 @@ func InitRestGroup(app *fiber.App, service domainGroup.IGroupService) Group {
 	app.Get("/group/participant-requests", rest.ListParticipantRequests)
 	app.Post("/group/participant-requests/approve", rest.ApproveParticipantRequests)
 	app.Post("/group/participant-requests/reject", rest.RejectParticipantRequests)
+	app.Post("/group/photo", rest.ChangeGroupPhoto)
 	return rest
 }
 
@@ -162,5 +163,25 @@ func (controller *Group) handleRequestedParticipants(c *fiber.Ctx, action whatsm
 		Code:    "SUCCESS",
 		Message: successMsg,
 		Results: result,
+	})
+}
+
+func (controller *Group) ChangeGroupPhoto(c *fiber.Ctx) error {
+	var request domainGroup.ChangeGroupPhotoRequest
+	err := c.BodyParser(&request)
+	utils.PanicIfNeeded(err)
+
+	request.Photo, err = c.FormFile("photo")
+	utils.PanicIfNeeded(err)
+
+	whatsapp.SanitizePhone(&request.GroupID)
+
+	err = controller.Service.ChangeGroupPhoto(c.UserContext(), request)
+	utils.PanicIfNeeded(err)
+
+	return c.JSON(utils.ResponseData{
+		Status:  200,
+		Code:    "SUCCESS",
+		Message: "Success change group photo",
 	})
 }

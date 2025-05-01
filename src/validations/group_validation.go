@@ -2,7 +2,10 @@ package validations
 
 import (
 	"context"
+	"fmt"
+	"strings"
 
+	"github.com/aldinokemal/go-whatsapp-web-multidevice/config"
 	domainGroup "github.com/aldinokemal/go-whatsapp-web-multidevice/domains/group"
 	pkgError "github.com/aldinokemal/go-whatsapp-web-multidevice/pkg/error"
 	validation "github.com/go-ozzo/ozzo-validation/v4"
@@ -83,6 +86,30 @@ func ValidateManageGroupRequestParticipants(ctx context.Context, request domainG
 
 	if err != nil {
 		return pkgError.ValidationError(err.Error())
+	}
+
+	return nil
+}
+
+// ValidateChangeGroupPhoto validates the request for changing a group's photo
+func ValidateChangeGroupPhoto(ctx context.Context, request domainGroup.ChangeGroupPhotoRequest) error {
+	if request.GroupID == "" {
+		return pkgError.ValidationError("group_id is required")
+	}
+
+	if request.Photo == nil {
+		return pkgError.ValidationError("photo is required")
+	}
+
+	// Validate file type
+	contentType := request.Photo.Header.Get("Content-Type")
+	if !strings.HasPrefix(contentType, "image/") {
+		return pkgError.ValidationError("file must be an image")
+	}
+
+	// Validate file size
+	if request.Photo.Size > config.WhatsappSettingMaxImageSize {
+		return pkgError.ValidationError(fmt.Sprintf("image size exceeds the maximum limit of %d bytes", config.WhatsappSettingMaxImageSize))
 	}
 
 	return nil

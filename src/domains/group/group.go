@@ -2,6 +2,7 @@ package group
 
 import (
 	"context"
+	"mime/multipart"
 	"time"
 
 	"go.mau.fi/whatsmeow"
@@ -14,6 +15,7 @@ type IGroupService interface {
 	ManageParticipant(ctx context.Context, request ParticipantRequest) (result []ParticipantStatus, err error)
 	GetGroupRequestParticipants(ctx context.Context, request GetGroupRequestParticipantsRequest) (result []GetGroupRequestParticipantsResponse, err error)
 	ManageGroupRequestParticipants(ctx context.Context, request GroupRequestParticipantsRequest) (result []ParticipantStatus, err error)
+	ChangeGroupPhoto(ctx context.Context, request ChangeGroupPhotoRequest) (err error)
 }
 
 type JoinGroupWithLinkRequest struct {
@@ -54,4 +56,9 @@ type GroupRequestParticipantsRequest struct {
 	GroupID      string                             `json:"group_id" form:"group_id"`
 	Participants []string                           `json:"participants" form:"participants"`
 	Action       whatsmeow.ParticipantRequestChange `json:"action" form:"action"`
+}
+
+type ChangeGroupPhotoRequest struct {
+	GroupID string               `json:"group_id" form:"group_id"`
+	Photo   *multipart.FileHeader `json:"photo" form:"photo"`
 }
