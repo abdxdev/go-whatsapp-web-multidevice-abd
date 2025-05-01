@@ -5,8 +5,9 @@ import (
 	"context"
 	"fmt"
 	"image"
-	"github.com/disintegration/imaging"
 
+	"github.com/disintegration/imaging"
+	
 	"github.com/aldinokemal/go-whatsapp-web-multidevice/config"
 	domainGroup "github.com/aldinokemal/go-whatsapp-web-multidevice/domains/group"
 	pkgError "github.com/aldinokemal/go-whatsapp-web-multidevice/pkg/error"

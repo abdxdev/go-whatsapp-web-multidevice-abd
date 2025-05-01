@@ -59,6 +59,6 @@ type GroupRequestParticipantsRequest struct {
 }
 
 type ChangeGroupPhotoRequest struct {
-	GroupID string               `json:"group_id" form:"group_id"`
+	GroupID string                `json:"group_id" form:"group_id"`
 	Photo   *multipart.FileHeader `json:"photo" form:"photo"`
 }
